@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+
+*.log
+*.tmp
+
+*.parquet
+*.csv
+
+execution_report.json
+
+env/
+.venv/
