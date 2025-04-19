@@ -1,0 +1,9 @@
+{
+    "layer": "Trusted",
+    "start_time": "2025-04-19 16:16:13.277855",
+    "end_time": "2025-04-19 16:16:22.527511",
+    "execution_time_seconds": 9.249656,
+    "total_records": 2869714,
+    "valid_records": 2723805,
+    "discarded_records": 145909
+}
