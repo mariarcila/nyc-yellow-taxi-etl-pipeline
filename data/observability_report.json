@@ -1,9 +1,7 @@
-{
-    "layer": "Trusted",
-    "start_time": "2025-04-19 16:16:13.277855",
-    "end_time": "2025-04-19 16:16:22.527511",
-    "execution_time_seconds": 9.249656,
-    "total_records": 2869714,
-    "valid_records": 2723805,
-    "discarded_records": 145909
-}
+OBSERVABILITY REPORT - Trusted Layer
+Start Time: 2025-04-19 16:09:07.063730
+End Time: 2025-04-19 16:09:15.550424
+Execution Time (s): 8.486694
+Total Records: 2869714
+Valid Records: 2723805
+Discarded Records (revalidación): 145909
