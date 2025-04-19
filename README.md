@@ -30,19 +30,24 @@ nyc-yellow-taxi-etl-pipeline/
 ├── trusted/                  # Limpieza, validación y enriquecimiento de los datos crudos
 ├── observability/            # Scripts para métricas de ejecución y control de calidad de datos
 ├── refined/                  # Cálculo y almacenamiento de KPIs para análisis
+│   ├── kpi_demand_peak_hours.py
+│   ├── kpi_geoeconomic_efficiency.py
+│   └── kpi_data_quality_impact.py
 ├── utils/                    # Funciones auxiliares como logs y validaciones
 ├── config/                   # Archivos de configuración del pipeline
 ├── data/                     # Archivos .parquet y reportes generados por cada capa
-│   ├── cleaned_2024.parquet          # Datos limpios (trusted layer)
-│   ├── refined/                      # KPIs en formato parquet
-│   └── observability_report.json     # Reporte de observabilidad del proceso ETL
+│   ├── cleaned_2024.parquet
+│   ├── observability_report.json
+│   └── kpis/
+│       ├── kpi_demand_peak_hours.parquet
+│       ├── kpi_geoeconomic_efficiency.parquet
+│       └── kpi_data_quality_impact.parquet
 ├── requirements.txt          # Dependencias del entorno para ejecutar el proyecto
 ├── execution_report.json     # Reporte automatizado con información general del pipeline
 └── README.md                 # Documentación general del proyecto
-
 ```
 
-
+---
 
 ## Trusted Layer
 
@@ -53,7 +58,9 @@ Esta capa contiene los datos crudos procesados y limpiados. El script `clean_tru
 - Verifica que los tipos de datos sean correctos.
 - Guarda los datos limpios en `data/cleaned_2024.parquet`.
 
-Total de registros limpios: **2.869.714**
+**Total de registros limpios:** 2.869.714
+
+---
 
 ## Observability Layer
 
@@ -67,21 +74,63 @@ El script `observability_metrics.py` evalúa la calidad y el rendimiento del pro
 
 El reporte se almacena en formato JSON en la ruta: `data/observability_report.json`.
 
+---
+
 ## Refined Layer
 
 En esta capa se realizan transformaciones analíticas sobre los datos limpios para generar indicadores clave de desempeño (KPIs), que permiten evaluar el comportamiento del sistema de taxis amarillos en Nueva York durante 2024.
 
-El script `generate_kpis.py` realiza las siguientes acciones:
+Los scripts de esta capa son:
 
-- Carga los datos limpios desde `data/cleaned_2024.parquet`.
-- Calcula KPIs como:
-  - Total de viajes por zona de recogida.
-  - Promedio de distancia y tarifa por viaje.
-  - Demanda horaria agregada.
-  - Porcentaje de propina promedio por tipo de pago.
-  - Total de ingresos por día.
-- Guarda los resultados en `data/refined/kpis_summary.parquet`.
+### 1. `kpi_demand_peak_hours.py`
+
+Calcula indicadores relacionados con los patrones de demanda:
+
+- Viajes totales por hora del día.
+- Días y horarios con mayor concentración de demanda.
+- Identificación de horas pico.
+- KPIs agregados de viajes por día de la semana.
+
+Los resultados se guardan en:  
+`data/kpis/kpi_demand_peak_hours.parquet`
 
 ---
+
+### 2. `kpi_geoeconomic_efficiency.py`
+
+Evalúa la eficiencia operativa del sistema desde una perspectiva geográfica y económica:
+
+- Ingreso promedio por zona de recogida.
+- Relación entre distancia recorrida y valor del viaje.
+- Tarifa promedio por kilómetro.
+- Zonas con mayor y menor eficiencia en términos de ingresos.
+
+Los resultados se guardan en:  
+`data/kpis/kpi_geoeconomic_efficiency.parquet`
+
+---
+
+### 3. `kpi_data_quality_impact.py`
+
+Analiza el impacto que tiene la calidad de los datos en los resultados de negocio:
+
+- Comparación de KPIs antes y después de la limpieza.
+- Porcentaje de reducción de registros por validaciones.
+- Estimación del ingreso afectado por registros descartados.
+
+Los resultados se guardan en:  
+`data/kpis/kpi_data_quality_impact.parquet`
+
+---
+
+## Cómo ejecutar el pipeline
+
+1. Asegúrate de tener instaladas las dependencias desde `requirements.txt`.
+2. Ejecuta cada script por capa, en orden:
+   - `raw/extract_raw.py`
+   - `trusted/clean_trusted.py`
+   - `observability/observability_metrics.py`
+   - Los scripts de la capa `refined/`.
+
 
 **Última actualización:** Abril de 2025.
