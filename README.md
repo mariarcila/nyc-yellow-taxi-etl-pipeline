@@ -51,24 +51,17 @@ Total de registros limpios: **2.869.714**
 
 ## Refined Layer
 
-En esta capa se realiza el análisis y la generación de indicadores clave (KPIs) para facilitar la toma de decisiones basada en datos. A partir de los datos limpios de la capa Trusted, se llevan a cabo agregaciones temporales, espaciales y económicas que permiten sintetizar la operación de los taxis amarillos en Nueva York durante el año 2024.
+En esta capa se realizan transformaciones analíticas sobre los datos limpios para generar indicadores clave de desempeño (KPIs), que permiten evaluar el comportamiento del sistema de taxis amarillos en Nueva York durante 2024.
 
-El script `generate_kpis.py` realiza las siguientes tareas:
+El script `generate_kpis.py` realiza las siguientes acciones:
 
-- Carga los datos validados desde `data/cleaned_2024.parquet`.
-- Calcula métricas agregadas por hora, por zona y por tipo de pago.
-- Genera un archivo `refined_kpis.csv` que contiene los KPIs extraídos.
+- Carga los datos limpios desde `data/cleaned_2024.parquet`.
+- Calcula KPIs como:
+  - Total de viajes por zona de recogida.
+  - Promedio de distancia y tarifa por viaje.
+  - Demanda horaria agregada.
+  - Porcentaje de propina promedio por tipo de pago.
+  - Total de ingresos por día.
+- Almacena los resultados en formato `.parquet` en la carpeta `data/refined_kpis/`.
 
-### Principales KPIs generados
-
-- Total de viajes por zona de recogida.
-- Ingreso promedio por viaje (por zona y por hora).
-- Distancia media recorrida.
-- Distribución de métodos de pago.
-- Total recaudado por franja horaria.
-- Propina media y su relación con el total pagado.
-- Cantidad de pasajeros transportados por hora y por zona.
-- Relación entre duración del viaje y monto pagado.
-
-Este archivo se encuentra en la ruta `REFINED/refined_kpis.csv` y puede ser utilizado en herramientas de visualización o análisis adicional.
-
+Este análisis sirve como base para generar reportes, visualizaciones o alimentar dashboards posteriores.
