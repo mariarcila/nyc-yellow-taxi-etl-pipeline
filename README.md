@@ -34,3 +34,15 @@ nyc-yellow-taxi-etl-pipeline/
 ├── execution_report.json  # Reporte generado automáticamente del proceso ETL
 └── README.md         # Documentación general del proyecto
 ```
+
+
+## Trusted Layer
+
+Esta capa contiene los datos crudos procesados y limpiados. El script `clean_trusted.py` realiza las siguientes acciones:
+
+- Carga los datos `.parquet` desde la carpeta `RAW`.
+- Aplica filtros para eliminar registros inválidos o incompletos.
+- Verifica que los tipos de datos sean correctos.
+- Guarda los datos limpios en `data/cleaned_2024.parquet`.
+
+Total de registros limpios: **2.869.714**
