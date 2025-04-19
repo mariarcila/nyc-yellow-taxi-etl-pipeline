@@ -132,5 +132,12 @@ Los resultados se guardan en:
    - `observability/observability_metrics.py`
    - Los scripts de la capa `refined/`.
 
+---
+
+## Documentación técnica adicional
+
+- [Arquitectura del pipeline](ARCHITECTURE.md)
+- [Indicadores clave de desempeño (KPIs)](KPIS.md)
+- [Observabilidad del proceso ETL](OBSERVABILITY.md)
 
 **Última actualización:** Abril de 2025.
